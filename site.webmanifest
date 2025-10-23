@@ -1,0 +1,21 @@
+{
+  "name": "Калькулятор алиментов",
+  "short_name": "Алименты",
+  "description": "Рассчитайте задолженность по алиментам по региону",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#43a047",
+  "icons": [
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
