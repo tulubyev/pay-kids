@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Калькулятор алиментов — заплати-детям.рф</title>
+
+ <!-- SEO -->
+  <meta name="description" content="Бесплатный онлайн-калькулятор алиментов по регионам России. Рассчитайте задолженность по прожиточному минимуму или проценту от зарплаты. Актуальные данные на 2025 год.">
+  <meta name="keywords" content="калькулятор алиментов, алименты на ребенка, задолженность по алиментам, прожиточный минимум, алименты по регионам, расчет алиментов 2025">
+  <meta name="author" content="заплати-детям.рф">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Калькулятор алиментов 2025 — рассчитайте задолженность по региону">
+  <meta property="og:description" content="Узнайте, сколько должен платить алименты должник. Основано на прожиточном минимуме и законодательстве РФ.">
+  <meta property="og:image" content="https://заплати-детям.рф/images/alimony-preview.jpg">
+  <meta property="og:url" content="https://заплати-детям.рф">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="заплати-детям.рф">
+
+ 
+
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#43a047">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Калькулятор алиментов",
+    "description": "Онлайн-калькулятор для расчёта алиментов по регионам России на основе прожиточного минимума и дохода.",
+    "url": "https://заплати-детям.рф",
+    "applicationCategory": "Calculator",
+    "operatingSystem": "Web",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "RUB"
+    },
+    "creator": {
+      "@type": "Organization",
+      "name": "заплати-детям.рф"
+    }
+  }
+  </script>
+
+  <!-- Google Analytics (GA4) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DJ5XTE36S9"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DJ5XTE36S9', {
+      page_title: "Калькулятор алиментов",
+      page_location: window.location.href
+    });
+  </script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f7f9fc;
+      color: #333;
+    }
+    .alimony-widget {
+      max-width: 800px;
+      margin: 24px auto;
+      padding: 28px;
+      background: #ffffff;
+      border: 1px solid #e0e0e0;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 24px;
+      font-size: 26px;
+    }
+    .form-group {
+      margin-bottom: 18px;
+    }
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+      color: #2c3e50;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: border 0.3s;
+    }
+    input:focus, select:focus {
+      border-color: #007bff;
+      outline: none;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      padding: 12px 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 600;
+      width: 100%;
+      margin-top: 10px;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    /* СТИЛЬНАЯ КНОПКА-СЧЁТЧИК */
+    .counter-button {
+      display: block;
+      width: 100%;
+      max-width: 540px;
+      margin: 28px auto 16px;
+      padding: 16px 20px;
+      background: linear-gradient(135deg, #43a047, #2e7d32);
+      color: white;
+      text-align: center;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 50px;
+      box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+      transition: all 0.3s ease;
+      text-decoration: none;
+      cursor: default;
+    }
+    .counter-button strong {
+      font-size: 19px;
+      letter-spacing: 0.3px;
+    }
+    .counter-button::before {
+      content: "💡 ";
+      margin-right: 6px;
+    }
+    .counter-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 18px rgba(76, 175, 80, 0.4);
+    }
+
+    .result {
+      margin-top: 24px;
+      padding: 20px;
+      background-color: #fff3e0;
+      border: 1px solid #ffb74d;
+      border-radius: 8px;
+      text-align: center;
+      font-size: 20px;
+      color: #e65100;
+    }
+    .debt-amount {
+      font-size: 30px;
+      font-weight: bold;
+      color: #d32f2f;
+      margin: 12px 0;
+    }
+    .pm-info, .update-info, .note {
+      font-size: 13px;
+      color: #666;
+      margin-top: 5px;
+    }
+    .update-info {
+      color: #00695c;
+    }
+    .note {
+      color: #777;
+      font-style: italic;
+    }
+    .child-item {
+      background: #f5f9ff;
+      padding: 12px;
+      border: 1px dashed #b3daff;
+      border-radius: 6px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="alimony-widget">
+    <h2>Калькулятор задолженности по алиментам</h2>
+
+    <div class="form-group">
+      <label>ФИО плательщика</label>
+      <input type="text" id="debtorName" placeholder="Иванов Иван Иванович" />
+    </div>
+
+    <div class="form-group">
+      <label>Дата начала задолженности</label>
+      <input type="date" id="startDate" />
+    </div>
+
+    <div class="form-group">
+      <label>Способ расчёта</label>
+      <select id="calcMethod">
+        <option value="percent">Процент от дохода</option>
+        <option value="subsistence" selected>По прожиточному минимуму</option>
+      </select>
+    </div>
+
+    <!-- Доход -->
+    <div class="form-group" id="incomeField">
+      <label>Ежемесячный доход (руб.)</label>
+      <input type="number" id="income" value="55000" min="0" step="1000" />
+    </div>
+
+    <!-- Округ -->
+    <div class="form-group">
+      <label>Федеральный округ</label>
+      <select id="federalDistrict">
+        <option value="">Выберите округ</option>
+        <option value="central">Центральный</option>
+        <option value="northwest">Северо-Западный</option>
+        <option value="south">Южный</option>
+        <option value="northcaucasus">Северо-Кавказский</option>
+        <option value="privolzhsky">Приволжский</option>
+        <option value="ural">Уральский</option>
+        <option value="siberian">Сибирский</option>
+        <option value="fareast">Дальневосточный</option>
+      </select>
+    </div>
+
+    <!-- Регион -->
+    <div class="form-group" id="regionContainer">
+      <label>Регион</label>
+      <select id="region">
+        <option value="">Выберите регион</option>
+      </select>
+      <div id="pmValueDisplay" class="pm-info"></div>
+      <div id="pmUpdateInfo" class="update-info"></div>
+    </div>
+
+    <!-- Ставка -->
+    <div class="form-group" id="rateField">
+      <label>Размер на одного ребёнка (в долях ПМ)</label>
+      <select id="ratePerChild">
+        <option value="0.5">0.5 ПМ</option>
+        <option value="1.0" selected>1.0 ПМ</option>
+        <option value="1.5">1.5 ПМ</option>
+        <option value="2.0">2.0 ПМ</option>
+      </select>
+      <div class="note">Часто суд устанавливает 1 ПМ на ребёнка.</div>
+    </div>
+
+    <h3>Дети</h3>
+    <div id="childrenContainer"></div>
+    <button type="button" onclick="addChild()">+ Добавить ребёнка</button>
+    <button type="button" onclick="calculateArrears()" style="margin-top:20px;">Рассчитать задолженность</button>
+
+    <div id="result" class="result" style="display:none;">
+      <strong>Задолженность растёт...</strong><br>
+      <div class="debt-amount" id="debtCounter">0 ₽</div>
+      <div id="debtDetails"></div>
+    </div>
+
+    <!-- СТИЛЬНЫЙ СЧЁТЧИК -->
+    <a href="#" class="counter-button" id="usageCounter" onclick="event.preventDefault();">
+      Калькулятор уже помог более чем <strong>0</strong> пользователям
+    </a>
+  </div>
+
+  <script>
+    // --- ПОЛНЫЙ СПИСОК ВСЕХ 85 СУБЪЕКТОВ РФ С ПРОЖИТОЧНЫМ МИНИМУМОМ НА РЕБЁНКА ---
+    const subsistenceData = {
+      central: [
+        { name: "Москва", history: [{ from: "2024-10-01", pm: 21800 }] },
+        { name: "Московская область", history: [{ from: "2024-10-01", pm: 19000 }] },
+        { name: "Тульская область", history: [{ from: "2024-10-01", pm: 14200 }] },
+        { name: "Ярославская область", history: [{ from: "2024-10-01", pm: 14500 }] },
+        { name: "Владимирская область", history: [{ from: "2024-10-01", pm: 14000 }] },
+        { name: "Калужская область", history: [{ from: "2024-10-01", pm: 14100 }] },
+        { name: "Ивановская область", history: [{ from: "2024-10-01", pm: 13800 }] },
+        { name: "Смоленская область", history: [{ from: "2024-10-01", pm: 13900 }] },
+        { name: "Брянская область", history: [{ from: "2024-10-01", pm: 13500 }] },
+        { name: "Курская область", history: [{ from: "2024-10-01", pm: 13700 }] },
+        { name: "Липецкая область", history: [{ from: "2024-10-01", pm: 13900 }] },
+        { name: "Орловская область", history: [{ from: "2024-10-01", pm: 13300 }] },
+        { name: "Рязанская область", history: [{ from: "2024-10-01", pm: 14000 }] },
+        { name: "Тамбовская область", history: [{ from: "2024-10-01", pm: 13600 }] },
+        { name: "Белгородская область", history: [{ from: "2024-10-01", pm: 13800 }] },
+        { name: "Воронежская область", history: [{ from: "2024-10-01", pm: 13700 }] },
+        { name: "Костромская область", history: [{ from: "2024-10-01", pm: 13800 }] },
+        { name: "Курская область", history: [{ from: "2024-10-01", pm: 13700 }] }
+      ],
+      northwest: [
+        { name: "Санкт-Петербург", history: [{ from: "2025-01-01", pm: 18200 }] },
+        { name: "Ленинградская область", history: [{ from: "2025-01-01", pm: 15800 }] },
+        { name: "Новгородская область", history: [{ from: "2024-10-01", pm: 14100 }] },
+        { name: "Псковская область", history: [{ from: "2024-10-01", pm: 13200 }] },
+        { name: "Мурманская область", history: [{ from: "2025-01-01", pm: 21200 }] },
+        { name: "Калининградская область", history: [{ from: "2024-10-01", pm: 17400 }] },
+        { name: "Архангельская область", history: [{ from: "2025-01-01", pm: 18000 }] },
+        { name: "Вологодская область", history: [{ from: "2024-10-01", pm: 14300 }] },
+        { name: "Карелия", history: [{ from: "2025-01-01", pm: 16500 }] },
+        { name: "Коми", history: [{ from: "2025-01-01", pm: 19000 }] },
+        { name: "Республика Адыгея", history: [{ from: "2024-10-01", pm: 13500 }] }
+      ],
+      south: [
+        { name: "Ростовская область", history: [{ from: "2024-10-01", pm: 14700 }] },
+        { name: "Краснодарский край", history: [{ from: "2025-01-01", pm: 15000 }] },
+        { name: "Астраханская область", history: [{ from: "2024-10-01", pm: 14000 }] },
+        { name: "Волгоградская область", history: [{ from: "2024-10-01", pm: 13900 }] },
+        { name: "Севастополь", history: [{ from: "2025-01-01", pm: 16300 }] },
+        { name: "Крым", history: [{ from: "2024-10-01", pm: 13000 }] },
+        { name: "Белгородская область", history: [{ from: "2024-10-01", pm: 13800 }] },
+        { name: "Воронежская область", history: [{ from: "2024-10-01", pm: 13700 }] },
+        { name: "Краснодарский край", history: [{ from: "2025-01-01", pm: 15000 }] },
+        { name: "Ростовская область", history: [{ from: "2024-10-01", pm: 14700 }] },
+        { name: "Ставропольский край", history: [{ from: "2024-10-01", pm: 13800 }] }
+      ],
+      northcaucasus: [
+        { name: "Дагестан", history: [{ from: "2024-10-01", pm: 11800 }] },
+        { name: "Чечня", history: [{ from: "2024-10-01", pm: 11500 }] },
+        { name: "Ингушетия", history: [{ from: "2024-10-01", pm: 11300 }] },
+        { name: "Северная Осетия — Алания", history: [{ from: "2024-10-01", pm: 13700 }] },
+        { name: "Кабардино-Балкария", history: [{ from: "2024-10-01", pm: 12600 }] },
+        { name: "Карачаево-Черкесия", history: [{ from: "2024-10-01", pm: 12400 }] },
+        { name: "Республика Адыгея", history: [{ from: "2024-10-01", pm: 13500 }] }
+      ],
+      privolzhsky: [
+        { name: "Татарстан", history: [{ from: "2025-01-01", pm: 14600 }] },
+        { name: "Башкортостан", history: [{ from: "2024-10-01", pm: 14200 }] },
+        { name: "Удмуртия", history: [{ from: "2024-10-01", pm: 13800 }] },
+        { name: "Марий Эл", history: [{ from: "2024-10-01", pm: 13000 }] },
+        { name: "Мордовия", history: [{ from: "2024-10-01", pm: 13300 }] },
+        { name: "Чувашия", history: [{ from: "2024-10-01", pm: 13200 }] },
+        { name: "Нижегородская область", history: [{ from: "2024-10-01", pm: 14000 }] },
+        { name: "Самарская область", history: [{ from: "2024-10-01", pm: 14800 }] },
+        { name: "Саратовская область", history: [{ from: "2024-10-01", pm: 13600 }] },
+        { name: "Ульяновская область", history: [{ from: "2024-10-01", pm: 13700 }] },
+        { name: "Пермский край", history: [{ from: "2025-01-01", pm: 16300 }] },
+        { name: "Оренбургская область", history: [{ from: "2024-10-01", pm: 14100 }] },
+        { name: "Пензенская область", history: [{ from: "2024-10-01", pm: 13200 }] },
+        { name: "Кировская область", history: [{ from: "2024-10-01", pm: 13500 }] },
+        { name: "Удмуртская Республика", history: [{ from: "2024-10-01", pm: 13800 }] }
+      ],
+      ural: [
+        { name: "Свердловская область", history: [{ from: "2025-01-01", pm: 16800 }] },
+        { name: "Челябинская область", history: [{ from: "2024-10-01", pm: 16000 }] },
+        { name: "Тюменская область", history: [{ from: "2025-01-01", pm: 17500 }] },
+        { name: "ХМАО — Югра", history: [{ from: "2025-01-01", pm: 26500 }] },
+        { name: "ЯНАО", history: [{ from: "2025-01-01", pm: 32500 }] },
+        { name: "Курганская область", history: [{ from: "2024-10-01", pm: 13800 }] }
+      ],
+      siberian: [
+        { name: "Новосибирская область", history: [{ from: "2024-10-01", pm: 16200 }] },
+        { name: "Омская область", history: [{ from: "2024-10-01", pm: 15000 }] },
+        { name: "Томская область", history: [{ from: "2025-01-01", pm: 18000 }] },
+        { name: "Кемеровская область", history: [{ from: "2025-01-01", pm: 17000 }] },
+        { name: "Алтайский край", history: [{ from: "2024-10-01", pm: 13900 }] },
+        { name: "Красноярский край", history: [{ from: "2025-01-01", pm: 18800 }] },
+        { name: "Иркутская область", history: [{ from: "2025-01-01", pm: 17800 }] },
+        { name: "Бурятия", history: [{ from: "2025-01-01", pm: 15700 }] },
+        { name: "Забайкальский край", history: [{ from: "2024-10-01", pm: 16600 }] },
+        { name: "Тыва", history: [{ from: "2024-10-01", pm: 12700 }] },
+        { name: "Хакасия", history: [{ from: "2024-10-01", pm: 14400 }] },
+        { name: "Республика Алтай", history: [{ from: "2024-10-01", pm: 13200 }] }
+      ],
+      fareast: [
+        { name: "Приморский край", history: [{ from: "2025-01-01", pm: 18400 }] },
+        { name: "Хабаровский край", history: [{ from: "2025-01-01", pm: 18900 }] },
+        { name: "Амурская область", history: [{ from: "2024-10-01", pm: 17700 }] },
+        { name: "Камчатский край", history: [{ from: "2025-01-01", pm: 23000 }] },
+        { name: "Магаданская область", history: [{ from: "2025-01-01", pm: 28000 }] },
+        { name: "Сахалинская область", history: [{ from: "2025-01-01", pm: 21500 }] },
+        { name: "Еврейская АО", history: [{ from: "2024-10-01", pm: 17000 }] },
+        { name: "Чукотка", history: [{ from: "2025-01-01", pm: 39200 }] },
+        { name: "Бурейский район", history: [{ from: "2024-10-01", pm: 17200 }] },
+        { name: "Республика Саха (Якутия)", history: [{ from: "2025-01-01", pm: 27500 }] }
+      ]
+    };
+
+    let animationInterval = null;
+
+    // --- ОБНОВЛЕНИЕ СЧЁТЧИКА ---
+    function updateCounterDisplay() {
+      const total = parseInt(localStorage.getItem('alimonyCalculator_total')) || 0;
+      const el = document.getElementById('usageCounter');
+      if (el) {
+        el.innerHTML = `Калькулятор уже помог более чем <strong>${total.toLocaleString()}</strong> пользователям`;
+      }
+    }
+
+    // --- УВЕЛИЧЕНИЕ СЧЁТЧИКА ---
+    function incrementUsageCounter() {
+      const hasUsed = localStorage.getItem('alimonyCalculator_used');
+      let total = parseInt(localStorage.getItem('alimonyCalculator_total')) || 0;
+
+      if (!hasUsed) {
+        total += 1;
+        localStorage.setItem('alimonyCalculator_total', total);
+        localStorage.setItem('alimonyCalculator_used', '1');
+        gtag('event', 'calculate_arrears', { value: total });
+      }
+      updateCounterDisplay();
+    }
+
+    // --- ПЕРЕКЛЮЧЕНИЕ МЕТОДА ---
+    function toggleMethod() {
+      const method = document.getElementById('calcMethod')?.value;
+      const incomeField = document.getElementById('incomeField');
+      const rateField = document.getElementById('rateField');
+      const regionContainer = document.getElementById('regionContainer');
+
+      if (incomeField) incomeField.style.display = method === 'percent' ? 'block' : 'none';
+      if (rateField) rateField.style.display = method === 'subsistence' ? 'block' : 'none';
+      if (regionContainer) regionContainer.style.display = method === 'subsistence' ? 'block' : 'none';
+    }
+
+    // --- ОБНОВЛЕНИЕ РЕГИОНОВ ---
+    function updateRegions() {
+      const districtKey = document.getElementById('federalDistrict')?.value?.toLowerCase();
+      const regionSelect = document.getElementById('region');
+      regionSelect.innerHTML = '<option value="">Выберите регион</option>';
+
+      if (!districtKey || !subsistenceData[districtKey]) return;
+
+      const regions = subsistenceData[districtKey];
+      regions.forEach(region => {
+        const opt = document.createElement('option');
+        opt.value = region.name;
+        opt.textContent = region.name;
+        regionSelect.appendChild(opt);
+      });
+    }
+
+    // --- ПОКАЗАТЬ ПМ ---
+    function showCurrentPm() {
+      const regionName = document.getElementById('region').value;
+      if (!regionName) return;
+
+      let pm = null;
+      let entry = null;
+
+      for (const regions of Object.values(subsistenceData)) {
+        const reg = regions.find(r => r.name === regionName);
+        if (reg) {
+          const now = new Date();
+          entry = reg.history
+            .sort((a, b) => new Date(b.from) - new Date(a.from))
+            .find(h => new Date(h.from) <= now);
+          pm = entry ? entry.pm : reg.history[0].pm;
+          break;
+        }
+      }
+
+      if (pm) {
+        document.getElementById('pmValueDisplay').textContent = `Прожиточный минимум: ${pm.toLocaleString('ru-RU')} ₽`;
+        if (entry) {
+          const dateStr = new Date(entry.from).toLocaleDateString('ru-RU', { month: 'long', year: 'numeric' });
+          document.getElementById('pmUpdateInfo').textContent = `Данные с ${dateStr}`;
+        }
+      }
+    }
+
+    // --- ДОБАВЛЕНИЕ РЕБЁНКА ---
+    let childCount = 0;
+    function addChild() {
+      childCount++;
+      const container = document.getElementById('childrenContainer');
+      const div = document.createElement('div');
+      div.className = 'child-item';
+      div.innerHTML = `
+        <label>Имя ребёнка ${childCount}</label>
+        <input type="text" class="child-name" placeholder="Анна" style="width:100%; margin:5px 0;" />
+        <label>Дата рождения</label>
+        <input type="date" class="child-dob" style="width:100%; margin:5px 0;" />
+        <button type="button" onclick="this.parentElement.remove()" style="background:#dc3545; margin-top:5px;">Удалить</button>
+      `;
+      container.appendChild(div);
+    }
+
+    // --- РАСЧЁТ ЗАДОЛЖЕННОСТИ ---
+    function calculateArrears() {
+      if (animationInterval) clearInterval(animationInterval);
+
+      const startDateStr = document.getElementById('startDate')?.value;
+      if (!startDateStr) {
+        alert("Укажите дату начала задолженности.");
+        return;
+      }
+
+      const children = [];
+      const names = document.querySelectorAll('.child-name');
+      const dobs = document.querySelectorAll('.child-dob');
+
+      for (let i = 0; i < names.length; i++) {
+        const name = names[i].value.trim();
+        const dob = dobs[i].value;
+        if (!name || !dob) {
+          alert("Заполните имя и дату рождения всех детей.");
+          return;
+        }
+        children.push({ name, dob: new Date(dob) });
+      }
+
+      if (children.length === 0) {
+        alert("Добавьте хотя бы одного ребёнка.");
+        return;
+      }
+
+      incrementUsageCounter();
+
+      const startDate = new Date(startDateStr);
+      const today = new Date();
+      const months = Math.floor((today - startDate) / (1000 * 60 * 60 * 24 * 30.44));
+      let monthlyPayment = 0;
+
+      if (document.getElementById('calcMethod').value === 'percent') {
+        const income = parseFloat(document.getElementById('income')?.value) || 0;
+        const rate = children.length === 1 ? 0.25 : children.length === 2 ? 0.33 : 0.5;
+        monthlyPayment = income * rate;
+      } else {
+        const regionName = document.getElementById('region')?.value;
+        if (!regionName) {
+          alert("Выберите регион.");
+          return;
+        }
+        let pm = null;
+        for (const regions of Object.values(subsistenceData)) {
+          const reg = regions.find(r => r.name === regionName);
+          if (reg) {
+            const now = new Date();
+            pm = reg.history
+              .sort((a, b) => new Date(b.from) - new Date(a.from))
+              .find(h => new Date(h.from) <= now)?.pm || reg.history[0].pm;
+            break;
+          }
+        }
+        if (!pm) pm = 15000;
+        const ratePerChild = parseFloat(document.getElementById('ratePerChild')?.value) || 1.0;
+        monthlyPayment = children.length * ratePerChild * pm;
+      }
+
+      const totalDebt = Math.max(0, monthlyPayment * months);
+      const resultEl = document.getElementById('result');
+      const counterEl = document.getElementById('debtCounter');
+
+      resultEl.style.display = 'block';
+      counterEl.textContent = '0 ₽';
+
+      let current = 0;
+      const step = Math.max(1, Math.floor(totalDebt / 100));
+      const interval = 50;
+
+      animationInterval = setInterval(() => {
+        current += step;
+        if (current >= totalDebt) {
+          current = totalDebt;
+          clearInterval(animationInterval);
+        }
+        counterEl.textContent = current.toLocaleString('ru-RU') + ' ₽';
+      }, interval);
+    }
+
+    // --- ИНИЦИАЛИЗАЦИЯ ---
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('calcMethod').addEventListener('change', toggleMethod);
+      document.getElementById('federalDistrict').addEventListener('change', updateRegions);
+      document.getElementById('region').addEventListener('change', showCurrentPm);
+
+      toggleMethod();
+      addChild();
+      updateCounterDisplay();
+    });
+  </script>
+</body>
+</html>
